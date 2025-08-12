@@ -68,5 +68,16 @@ public class Intake implements Subsystem {
     public void out() {
         leftServo.setPower(-1);
         rightServo.setPower(-1);
+
+
     }
+
+    public double getLeftPosition() {
+        return leftMotor.getCurrentPosition();
+    }
+
+    public double getRightPosition() {
+        return rightMotor.getCurrentPosition();
+    }
+
 }

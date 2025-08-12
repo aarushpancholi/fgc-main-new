@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-
 // Subsystem for BDU collection - only servos
 public class Collection implements Subsystem {
 
