@@ -15,22 +15,33 @@ public class Stopper implements Subsystem {
         rightStopper = hardwareMap.get(Servo.class, "rightStopper");
     }
 
-    public void zero() {
-        leftStopper.setPosition(0);
+    // Close both stoppers
+    public void leftzero() {
+        leftStopper.setPosition(1);
+    }
+
+    public void rightzero() {
         rightStopper.setPosition(0);
     }
 
     public void filter() {
-        leftStopper.setPosition(0.7);
-        rightStopper.setPosition(0.7);
+        leftStopper.setPosition(0.0);
+        rightStopper.setPosition(1.0);
     }
 
     public void rightStop() {
-        rightStopper.setPosition(0.35);
+        rightStopper.setPosition(0.37);
     }
 
     public void leftStop() {
-        leftStopper.setPosition(0.35);
+        leftStopper.setPosition(0.50);
     }
 
+    public double getLeftPosition() {
+        return leftStopper.getPosition();
+    }
+
+    public double getRightPosition() {
+        return rightStopper.getPosition();
+    }
 }

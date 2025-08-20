@@ -1,10 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystem;
 
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.Range;
 
 public class TankDriveSimple {
@@ -13,10 +10,10 @@ public class TankDriveSimple {
 //    IMU imu; // kept in case you still want telemetry later; not used for driving here
 
     public TankDriveSimple(HardwareMap hardwareMap) {
-        leftFront  = hardwareMap.get(DcMotor.class, "left_front");
-        leftBack   = hardwareMap.get(DcMotor.class, "left_back");
-        rightFront = hardwareMap.get(DcMotor.class, "right_front");
-        rightBack  = hardwareMap.get(DcMotor.class, "right_back"); // fixed mapping
+        leftFront  = hardwareMap.get(DcMotor.class, "front_left");
+        leftBack   = hardwareMap.get(DcMotor.class, "back_left");
+        rightFront = hardwareMap.get(DcMotor.class, "front_right");
+        rightBack  = hardwareMap.get(DcMotor.class, "back_right"); // fixed mapping
 
 //        // Optional: keep IMU init if you still want to read angles elsewhere
 //        imu = hardwareMap.get(IMU.class, "imu");
@@ -48,13 +45,13 @@ public class TankDriveSimple {
 
     /**
      * Arcade drive:
-     *  - left_y: forward/back (push forward = positive; invert if needed)
+     * *  - left_y: forward/back (push forward = positive; invert if needed)
      *  - right_x: turn right/left
      *  - right_y: unused
      */
-    public void drive(float left_y, float right_x) {
-        double drive = -left_y;   // invert to make stick forward = forward robot
-        double turn  = right_x;
+    public void drive(float left_x, float right_y) {
+        double turn = left_x;   // invert to make stick forward = forward robot
+        double drive = -right_y;
 
         double leftPower  = drive + turn;
         double rightPower = drive - turn;

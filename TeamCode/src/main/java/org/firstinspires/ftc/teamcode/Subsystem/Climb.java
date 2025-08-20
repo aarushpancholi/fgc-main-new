@@ -19,10 +19,18 @@ public class Climb implements Subsystem {
     }
 
     public void climbUp() {
-        climb.setPower(1.0); // full power (adjust if needed)
+        climb.setPower(0.8); // full power (adjust if needed)
     }
 
     public void stopClimb() {
         climb.setPower(0.0);
     }
+
+    public double getPower() {
+        return climb.getPower();
+    }
+    public void climbDown() {
+        climb.setPower(-0.8); // full power reverse
+    }
+
 }

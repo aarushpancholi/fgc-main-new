@@ -13,24 +13,24 @@ public class Collection implements Subsystem {
     private final Servo rightServo;
 
     public Collection(HardwareMap hardwareMap, Telemetry telemetry) {
-        leftServo = hardwareMap.get(Servo.class, "leftservo");
-        rightServo = hardwareMap.get(Servo.class, "rightservo");
+        leftServo = hardwareMap.get(Servo.class, "leftServo");
+        rightServo = hardwareMap.get(Servo.class, "rightServo");
 
         // Set initial position (90 degrees)
-        leftServo.setPosition(0.5);
-        rightServo.setPosition(0.5);
+        leftServo.setPosition(0.3);
+        rightServo.setPosition(0.22);
     }
 
     // Move to 0 degrees-
     public void collect() {
-        leftServo.setPosition(0.5);
-        rightServo.setPosition(0.5);
+        leftServo.setPosition(0.7);
+        rightServo.setPosition(0.6);
     }
 
     // Move back to 90 degrees
     public void reset() {
-        leftServo.setPosition(0.0);
-        rightServo.setPosition(0.0);
+        leftServo.setPosition(0.3);
+        rightServo.setPosition(0.22);
     }
 
     public double getLeftPosition() {
