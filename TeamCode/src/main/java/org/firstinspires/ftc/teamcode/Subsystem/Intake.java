@@ -20,7 +20,7 @@ public class Intake implements Subsystem {
 
     public int mposL = 0;
 
-    public int mposR = 0;
+    public int mposR = 140;
 
     public Intake(HardwareMap hardwareMap, Telemetry telemetry) {
         leftServo = hardwareMap.get(CRServo.class, "leftServo_Intake");
@@ -57,7 +57,7 @@ public class Intake implements Subsystem {
 
     public void on() {
         leftServo.setPower(1);
-        rightServo.setPower(1);
+        rightServo.setPower(-1);
     }
 
     public void off() {

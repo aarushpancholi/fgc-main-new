@@ -17,20 +17,23 @@ public class Collection implements Subsystem {
         rightServo = hardwareMap.get(Servo.class, "rightServo");
 
         // Set initial position (90 degrees)
-        leftServo.setPosition(0.3);
-        rightServo.setPosition(0.22);
+        leftServo.setPosition(1.0);
+        rightServo.setPosition(0.0);
+
+        rightServo.setDirection(Servo.Direction.REVERSE);
+
     }
 
     // Move to 0 degrees-
-    public void collect() {
-        leftServo.setPosition(0.7);
-        rightServo.setPosition(0.6);
+    public void reset() {
+        leftServo.setPosition(1.0);
+        rightServo.setPosition(0.8);
     }
 
     // Move back to 90 degrees
-    public void reset() {
-        leftServo.setPosition(0.3);
-        rightServo.setPosition(0.22);
+    public void collect() {
+        leftServo.setPosition(0.1);
+        rightServo.setPosition(0.0);
     }
 
     public double getLeftPosition() {

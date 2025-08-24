@@ -39,7 +39,7 @@ public class MainTeleOp extends LinearOpMode {
 
         while (opModeIsActive()) {
             // Gamepad1
-            //DRIVETRAIN
+            //DRIVETRAINq
             drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
 
             //INTAKE SERVO
@@ -95,7 +95,7 @@ public class MainTeleOp extends LinearOpMode {
 
             //INTAKE POS
             if (gamepad2.x) {
-                intake.mainPos();
+                intake.on();
             }
             //INTAKE RESET
             if (gamepad2.dpad_down) {
