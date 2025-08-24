@@ -42,8 +42,8 @@ public class Intake implements Subsystem {
         rightMotor.setTargetPosition(mposR);
         leftMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         rightMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        leftMotor.setPower(0.7);
-        rightMotor.setPower(0.7);
+        leftMotor.setPower(0.4);
+        rightMotor.setPower(0.4);
     }
 
     public void zeroPos() {
@@ -51,8 +51,23 @@ public class Intake implements Subsystem {
         rightMotor.setTargetPosition(0);
         leftMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         rightMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        leftMotor.setPower(0.7);
-        rightMotor.setPower(0.7);
+        leftMotor.setPower(0.4);
+        rightMotor.setPower(0.4);
+    }
+
+    public void leftManualOpen() {
+        leftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        leftMotor.setPower(0.12;
+    }
+
+    public void leftManualClose() {
+        leftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        leftMotor.setPower(-0.2);
+    }
+
+    public void leftStop() {
+        leftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        leftMotor.setPower(0);
     }
 
     public void on() {

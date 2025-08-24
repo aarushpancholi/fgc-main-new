@@ -54,12 +54,12 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             //CLIMB OFF + REVERSE
-            if (gamepad1.dpad_left) {
-                climb.stopClimb();
-            }
-            if (gamepad1.dpad_right) {
-                climb.climbDown();
-            }
+//            if (gamepad1.dpad_left) {
+//                climb.stopClimb();
+//            }
+//            if (gamepad1.dpad_right) {
+//                climb.climbDown();
+//            }
 
             //Gamepad2
             //STOPPER POS
@@ -94,12 +94,44 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             //INTAKE POS
-            if (gamepad2.x) {
+//            if (gamepad2.x) {
+//                intake.on();
+//            }
+//            //INTAKE RESET
+//            if (gamepad2.dpad_down) {
+//                intake.zeroPos();
+//            }
+
+            if (gamepad1.a) {
+                intake.zeroPos();
+            }
+
+            if (gamepad1.y) {
+                intake.mainPos();
+            }
+
+            if (gamepad1.right_trigger > 0.1) {
                 intake.on();
             }
-            //INTAKE RESET
-            if (gamepad2.dpad_down) {
-                intake.zeroPos();
+
+            if (gamepad1.left_trigger > 0.1) {
+                intake.off();
+            }
+//
+//            if (gamepad1.dpad_down) {
+//                intake.
+//            }
+
+            if (gamepad1.dpad_left) {
+                intake.leftManualClose();
+            }
+
+            if (gamepad1.dpad_right) {
+                intake.leftManualOpen();
+            }
+
+            if (gamepad1.dpad_up) {
+                intake.leftStop();
             }
 
             //CLIMB

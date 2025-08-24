@@ -32,8 +32,8 @@ public class Collection implements Subsystem {
 
     // Move back to 90 degrees
     public void collect() {
-        leftServo.setPosition(0.1);
-        rightServo.setPosition(0.0);
+        leftServo.setPosition(0.425);
+        rightServo.setPosition(0.25);
     }
 
     public double getLeftPosition() {
