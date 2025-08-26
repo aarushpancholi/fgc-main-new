@@ -49,15 +49,15 @@ public class TankDriveSimple {
      *  - right_x: turn right/left
      *  - right_y: unused
      */
-    public void drive(float left_x, float right_y) {
+    public void drive(float left_x, float right_y, float driveSens) {
         double turn = left_x;   // invert to make stick forward = forward robot
         double drive = -right_y;
 
         double leftPower  = drive + turn;
         double rightPower = drive - turn;
 
-        leftPower  = Range.clip(leftPower,  -1.0, 1.0);
-        rightPower = Range.clip(rightPower, -1.0, 1.0);
+        leftPower  = Range.clip(leftPower,  -1.0, 1.0)/driveSens;
+        rightPower = Range.clip(rightPower, -1.0, 1.0)/driveSens;
 
         leftFront.setPower(leftPower);
         leftBack.setPower(-leftPower);

@@ -18,7 +18,7 @@ public class Intake implements Subsystem {
     private final CRServo leftServo, rightServo;
     private final DcMotorEx leftMotor, rightMotor;
 
-    public int mposL = 0;
+    public int mposL = 140;
 
     public int mposR = 140;
 
@@ -28,7 +28,7 @@ public class Intake implements Subsystem {
         leftMotor = hardwareMap.get(DcMotorEx.class, "leftMotor_Intake");
         rightMotor = hardwareMap.get(DcMotorEx.class, "rightMotor_Intake");
 
-        leftMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        leftMotor.setDirection(DcMotorEx.Direction.REVERSE);
         rightMotor.setDirection(DcMotorEx.Direction.FORWARD);
 
         leftMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
@@ -55,18 +55,24 @@ public class Intake implements Subsystem {
         rightMotor.setPower(0.4);
     }
 
-    public void leftManualOpen() {
+    public void manualOpen() {
         leftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        leftMotor.setPower(0.12;
+        rightMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        leftMotor.setPower(0.2);
+        rightMotor.setPower(0.2);
     }
 
-    public void leftManualClose() {
+    public void manualClose() {
         leftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         leftMotor.setPower(-0.2);
+        rightMotor.setPower(-0.2);
     }
 
-    public void leftStop() {
+    public void stop() {
         leftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setPower(0);
         leftMotor.setPower(0);
     }
 

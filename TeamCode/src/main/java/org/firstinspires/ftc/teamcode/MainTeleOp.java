@@ -40,7 +40,7 @@ public class MainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
             // Gamepad1
             //DRIVETRAINq
-            drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
+            drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x, 1);
 
             //INTAKE SERVO
             if (gamepad1.b) {
@@ -54,12 +54,12 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             //CLIMB OFF + REVERSE
-//            if (gamepad1.dpad_left) {
-//                climb.stopClimb();
-//            }
-//            if (gamepad1.dpad_right) {
-//                climb.climbDown();
-//            }
+            if (gamepad1.right_stick_button) {
+                climb.stopClimb();
+            }
+            if (gamepad1.left_stick_button) {
+                climb.climbDown();
+            }
 
             //Gamepad2
             //STOPPER POS
@@ -111,11 +111,15 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             if (gamepad1.right_trigger > 0.1) {
-                intake.on();
+                drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x, 2);
             }
 
-            if (gamepad1.left_trigger > 0.1) {
+            if (gamepad1.left_bumper) {
                 intake.off();
+            }
+
+            if (gamepad1.right_bumper) {
+                intake.on();
             }
 //
 //            if (gamepad1.dpad_down) {
@@ -123,15 +127,15 @@ public class MainTeleOp extends LinearOpMode {
 //            }
 
             if (gamepad1.dpad_left) {
-                intake.leftManualClose();
+                intake.manualClose();
             }
 
             if (gamepad1.dpad_right) {
-                intake.leftManualOpen();
+                intake.manualOpen();
             }
 
             if (gamepad1.dpad_up) {
-                intake.leftStop();
+                intake.stop();
             }
 
             //CLIMB
