@@ -42,22 +42,29 @@ public class MainTeleOp extends LinearOpMode {
             //DRIVETRAINq
             drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x, 1);
 
-            //INTAKE SERVO
-            if (gamepad1.b) {
-                intake.on();
-            }
-            if (gamepad1.x) {
-                intake.out();
-            }
-            if (gamepad1.y) {
-                intake.off();
-            }
+//            //INTAKE SERVO
+//            if (gamepad1.b) {
+//                intake.on();
+//            }
+//            if (gamepad1.x) {
+//                intake.out();
+//            }
+//            if (gamepad1.y) {
+//                intake.off();
+//            }
 
             //CLIMB OFF + REVERSE
             if (gamepad1.right_stick_button) {
                 climb.stopClimb();
             }
             if (gamepad1.left_stick_button) {
+                climb.climbDown();
+            }
+            if (gamepad2.a) {
+                climb.climbUp();
+            }
+
+            if (gamepad2.b) {
                 climb.climbDown();
             }
 
@@ -67,31 +74,33 @@ public class MainTeleOp extends LinearOpMode {
 
 
             if (gamepad2.right_bumper) {
-                stopper.rightStop();
+                stopper.close();
             }
-            if (gamepad2.left_bumper) {
-                stopper.leftStop();
+            else if (gamepad2.left_bumper) {
+                stopper.open();
+            } else {
+                stopper.stop();
             }
             //STOPPER RESET
-            if (gamepad2.dpad_left) {
-                stopper.leftzero();
-            }
-            if (gamepad2.dpad_right) {
-                stopper.rightzero();
-            }
+//            if (gamepad2.dpad_left) {
+//                stopper.zero();
+//            }
+//            if (gamepad2.dpad_right) {
+//                stopper.rightzero();
+//            }
+//
+//            //COLLECTION POS
+//            if (gamepad2.y) {
+//                collection.collect();
+//            }
+//            //COLLECTION RESET
+//            if (gamepad2.dpad_up) {
+//                collection.reset();
+//            }
 
-            //COLLECTION POS
-            if (gamepad2.y) {
-                collection.collect();
-            }
-            //COLLECTION RESET
-            if (gamepad2.dpad_up) {
-                collection.reset();
-            }
-
-            if (gamepad2.b) {
-                stopper.filter();
-            }
+//            if (gamepad2.b) {
+//                stopper.collect();
+//            }
 
             //INTAKE POS
 //            if (gamepad2.x) {
@@ -114,11 +123,11 @@ public class MainTeleOp extends LinearOpMode {
                 drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x, 2);
             }
 
-            if (gamepad1.left_bumper) {
+            if (gamepad2.left_trigger > 0.1) {
                 intake.off();
             }
 
-            if (gamepad1.right_bumper) {
+            if (gamepad2.right_trigger > 0.1) {
                 intake.on();
             }
 //
@@ -138,17 +147,17 @@ public class MainTeleOp extends LinearOpMode {
                 intake.stop();
             }
 
-            //CLIMB
-            if (gamepad2.a) {
-                climb.climbUp();
-            }
+//            //CLIMB
+//            if (gamepad2.a) {
+//                climb.climbUp();
+//            }
 
             // Telemetry
             telemetry.addData("Climb Motor Power", climb.getPower());
             telemetry.addData("Collection Left Pos", collection.getLeftPosition());
             telemetry.addData("Collection Right Pos", collection.getRightPosition());
-            telemetry.addData("Right Bumper", stopper.getRightPosition());
-            telemetry.addData("Left Bumper", stopper.getLeftPosition());
+//            telemetry.addData("Right Bumper", stopper.getRightPosition());
+//            telemetry.addData("Left Bumper", stopper.getLeftPosition());
             telemetry.addData("Left Intake Motor Pos", intake.getLeftPosition());
             telemetry.addData("Right Intake Motor Pos", intake.getRightPosition());
             telemetry.update();
