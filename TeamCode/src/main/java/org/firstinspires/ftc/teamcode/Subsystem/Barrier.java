@@ -13,35 +13,30 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 // Subsystem for the main barrier intake - along with the arm itself and servo intake
-public class Intake implements Subsystem {
+public class Barrier implements Subsystem {
 
-    private final DcMotorEx intake;
+    private final DcMotorEx barrier;
 
-    public Intake(HardwareMap hardwareMap, Telemetry telemetry) {
-        intake = hardwareMap.get(DcMotorEx.class, "intake");
+    public Barrier(HardwareMap hardwareMap, Telemetry telemetry) {
+        barrier = hardwareMap.get(DcMotorEx.class, "barrier");
 
-        intake.setDirection(DcMotorEx.Direction.FORWARD);
+        barrier.setDirection(DcMotorEx.Direction.FORWARD);
 
-        intake.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        barrier.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
 
+    }
+
+    public void extend() {
+        barrier.setPower(1);
     }
 
     public void stop() {
-        intake.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        intake.setPower(0);
+        barrier.setPower(0);
     }
 
-    public void on() {
-        intake.setPower(1);
-    }
-
-    public void off() {
-        intake.setPower(0);
-    }
-
-    public void out() {
-        intake.setPower(-1);
+    public void retract() {
+        barrier.setPower(-1);
 
 
     }

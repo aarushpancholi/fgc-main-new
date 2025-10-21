@@ -3,34 +3,29 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Subsystem.Climb;
-import org.firstinspires.ftc.teamcode.Subsystem.Collection;
+import org.firstinspires.ftc.teamcode.Subsystem.Barrier;
 import org.firstinspires.ftc.teamcode.Subsystem.Intake;
-import org.firstinspires.ftc.teamcode.Subsystem.Stopper;
+import org.firstinspires.ftc.teamcode.Subsystem.TankDriveSimple;
+import org.firstinspires.ftc.teamcode.Subsystem.Intake;
+import org.firstinspires.ftc.teamcode.Subsystem.Climb;
 import org.firstinspires.ftc.teamcode.Subsystem.TankDriveSimple;
 
-@TeleOp(name = "Main FGC Practice", group = "Linear OpMode")
+@TeleOp(name = "Internationals FGC Teleop", group = "Linear OpMode")
 public class MainTeleOp extends LinearOpMode {
-    private TankDriveSimple drivetrain;
-    private Climb climb;
-    private Collection collection;
-    private Intake intake;
-    private Stopper stopper;
 
-    // Toggle states
-    private boolean rightStopperOpen = false;
-    private boolean leftStopperOpen = false;
-    private boolean prevRightBumper = false;
-    private boolean prevLeftBumper = false;
+    private TankDriveSimple drivetrain;
+    private Intake intake;
+    private Climb climb;
+
+    private Barrier barrier;
 
     @Override
     public void runOpMode() {
         // Initialize subsystems
         drivetrain = new TankDriveSimple(hardwareMap);
-        climb = new Climb(hardwareMap, telemetry);
-        collection = new Collection(hardwareMap, telemetry);
         intake = new Intake(hardwareMap, telemetry);
-        stopper = new Stopper(hardwareMap, telemetry);
+        climb = new Climb(hardwareMap, telemetry);
+        barrier = new Barrier(hardwareMap, telemetry);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -38,129 +33,48 @@ public class MainTeleOp extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            // Gamepad1
-            //DRIVETRAINq
-            drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x, 1);
+            double speedMode = (gamepad1.right_trigger > 0.1) ? 2.0 : 1.0;
+            drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x, (float) speedMode);
 
-//            //INTAKE SERVO
-//            if (gamepad1.b) {
-//                intake.on();
-//            }
-//            if (gamepad1.x) {
-//                intake.out();
-//            }
-//            if (gamepad1.y) {
-//                intake.off();
-//            }
+            boolean intakeForward = gamepad1.circle;
+            boolean intakeReverse = gamepad1.cross;
 
-            //CLIMB OFF + REVERSE
-            if (gamepad1.right_stick_button) {
-                climb.stopClimb();
-            }
-            if (gamepad1.left_stick_button) {
-                climb.climbDown();
-            }
-            if (gamepad2.a) {
-                climb.climbUp();
-            }
-
-            if (gamepad2.b) {
-                climb.climbDown();
-            }
-
-            //Gamepad2
-            //STOPPER POS
-
-
-
-            if (gamepad2.right_bumper) {
-                stopper.close();
-            }
-            else if (gamepad2.left_bumper) {
-                stopper.open();
+            if (intakeReverse) {
+                intake.out();
+            } else if (intakeForward) {
+                intake.on();
             } else {
-                stopper.stop();
-            }
-            //STOPPER RESET
-//            if (gamepad2.dpad_left) {
-//                stopper.zero();
-//            }
-//            if (gamepad2.dpad_right) {
-//                stopper.rightzero();
-//            }
-//
-//            //COLLECTION POS
-//            if (gamepad2.y) {
-//                collection.collect();
-//            }
-//            //COLLECTION RESET
-//            if (gamepad2.dpad_up) {
-//                collection.reset();
-//            }
-
-//            if (gamepad2.b) {
-//                stopper.collect();
-//            }
-
-            //INTAKE POS
-//            if (gamepad2.x) {
-//                intake.on();
-//            }
-//            //INTAKE RESET
-//            if (gamepad2.dpad_down) {
-//                intake.zeroPos();
-//            }
-
-            if (gamepad1.a) {
-                intake.zeroPos();
-            }
-
-            if (gamepad1.y) {
-                intake.mainPos();
-            }
-
-            if (gamepad1.right_trigger > 0.1) {
-                drivetrain.drive(gamepad1.left_stick_y, gamepad1.right_stick_x, 2);
-            }
-
-            if (gamepad2.left_trigger > 0.1) {
                 intake.off();
             }
 
-            if (gamepad2.right_trigger > 0.1) {
-                intake.on();
+            // ---------------- CLIMB ----------------
+            if (gamepad2.a | gamepad1.dpad_up) {
+                climb.climbUp();
             }
-//
-//            if (gamepad1.dpad_down) {
-//                intake.
-//            }
-
-            if (gamepad1.dpad_left) {
-                intake.manualClose();
+            if (gamepad2.b | gamepad1.dpad_down) {
+                climb.climbDown();
             }
-
-            if (gamepad1.dpad_right) {
-                intake.manualOpen();
+            if (gamepad2.x | gamepad1.dpad_left) {
+                climb.stopClimb();
             }
 
-            if (gamepad1.dpad_up) {
-                intake.stop();
+
+            // ---------------- BARRIER ---------------
+            if (gamepad2.right_bumper) {
+                barrier.extend();
+            } else if (gamepad2.left_bumper) {
+                barrier.retract();
+            } else {
+                barrier.stop();
             }
 
-//            //CLIMB
-//            if (gamepad2.a) {
-//                climb.climbUp();
-//            }
-
-            // Telemetry
-            telemetry.addData("Climb Motor Power", climb.getPower());
-            telemetry.addData("Collection Left Pos", collection.getLeftPosition());
-            telemetry.addData("Collection Right Pos", collection.getRightPosition());
-//            telemetry.addData("Right Bumper", stopper.getRightPosition());
-//            telemetry.addData("Left Bumper", stopper.getLeftPosition());
-            telemetry.addData("Left Intake Motor Pos", intake.getLeftPosition());
-            telemetry.addData("Right Intake Motor Pos", intake.getRightPosition());
+            // ---------------- TELEMETRY ----------------
+            telemetry.addData("Drive Speed Mode", speedMode);
+            telemetry.addData("Intake", intakeReverse ? "REVERSING" : (intakeForward ? "FORWARD" : "OFF"));
             telemetry.update();
+
+            // Don’t block the loop — one pass per cycle.
+            idle();
         }
     }
 }

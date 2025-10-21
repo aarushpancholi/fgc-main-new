@@ -10,10 +10,10 @@ public class TankDriveSimple {
 //    IMU imu; // kept in case you still want telemetry later; not used for driving here
 
     public TankDriveSimple(HardwareMap hardwareMap) {
-        leftFront  = hardwareMap.get(DcMotor.class, "front_left");
-        leftBack   = hardwareMap.get(DcMotor.class, "back_left");
-        rightFront = hardwareMap.get(DcMotor.class, "front_right");
-        rightBack  = hardwareMap.get(DcMotor.class, "back_right"); // fixed mapping
+        leftFront  = hardwareMap.get(DcMotor.class, "fl");
+        leftBack   = hardwareMap.get(DcMotor.class, "bl");
+        rightFront = hardwareMap.get(DcMotor.class, "fr");
+        rightBack  = hardwareMap.get(DcMotor.class, "br"); // fixed mapping
 
 //        // Optional: keep IMU init if you still want to read angles elsewhere
 //        imu = hardwareMap.get(IMU.class, "imu");
